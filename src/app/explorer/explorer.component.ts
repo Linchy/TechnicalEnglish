@@ -1,25 +1,36 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ExplorerService } from "./explorer.service";
-import { IFeature } from "./explorer.interfaces";
-
-let MOCK_FEATURE_1 = { Name: 'feature1' };
-let MOCK_FEATURE_2 = { Name: 'feature2' };
+import { IFeature, IExplorerState } from "./explorer.interfaces";
+import { Subscription } from "rxjs/Subscription";
 
 @Component ({
     selector: 'explorer',
     templateUrl: './explorer.component.html',
     styleUrls: [ './explorer.component.css' ],
-    providers: [ExplorerService]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExplorerComponent {
     public title: string;
-    public features: IFeature[];
+    public state: IExplorerState;
+
+    public explorerServiceSub: Subscription;
 
     constructor(
         public explorerService: ExplorerService) {
         this.title = 'Features';
-        explorerService.addFeature(MOCK_FEATURE_1);
-        explorerService.addFeature(MOCK_FEATURE_2);
-        this.features = explorerService.getFeatures();
+        this.state = explorerService.getState();
+
+        this.explorerServiceSub = explorerService.stateChange.subscribe((value) => { 
+            this.state = value;
+          });
     }
-}
+
+    ngOnDestroy() {
+      //prevent memory leak when component destroyed
+      this.explorerServiceSub.unsubscribe();
+    }
+    
+    public open(event, item) {
+      alert('Open ' + item);
+    }
+} 

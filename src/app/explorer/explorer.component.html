@@ -2,7 +2,7 @@
     <h3>{{title}}</h3>
 
     <ul>
-        <li *ngFor="let item of features; let i = index">
+        <li  *ngFor="let item of state.Features; let i = index" (click)="open($event, item)">
             {{item.Name}}
         </li>
     </ul>

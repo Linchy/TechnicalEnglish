@@ -1,20 +1,30 @@
-import { IFeature } from "./explorer.interfaces";
+import { IFeature, IExplorerState } from "./explorer.interfaces";
 import { Injectable } from "@angular/core";
+import { Map } from "immutable";
+import { Subject } from "rxjs/Subject";
 
-//Injectable()
+Injectable()
 export class ExplorerService {
 
-    private features: IFeature[];
+    private state: IExplorerState;
+    public stateChange: Subject<IExplorerState> = new Subject<IExplorerState>();
 
     constructor() {
-        this.features = [];
+        this.state = {
+            Features: []
+        };
     }
 
     addFeature(feature: IFeature) {
-        this.features.push(feature);
+        this.state = {
+            ...this.state,
+            Features: [...this.state.Features, feature]
+        };
+        
+        this.stateChange.next(this.state);
     }
 
-    getFeatures() : IFeature[] {
-        return this.features;
+    getState() : IExplorerState {
+        return this.state;
     }
 } 

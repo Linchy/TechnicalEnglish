@@ -47,15 +47,19 @@ describe('ExplorerComponent', () =>
         expect(element.querySelector('h3').textContent).toEqual('Features');
     });
 
-    it('has 1 feature', () => {
-        const service = new ExplorerService();
-        service.addFeature(MOCK_FEATURE_1);
+    it('has 1 feature',  async () => {
+        inject([ExplorerService], (service: ExplorerService) => {
+            
+            service.addFeature(MOCK_FEATURE_1);
 
-        let element = getUIElement();
-        expect(element.querySelector('p').textContent).toEqual(MOCK_FEATURE_1.Name);
+            let element = getUIElement();
+            let list = element.querySelector('li');
+            
+            expect(list.childNodes[0].textContent).toEqual(MOCK_FEATURE_1.Name);
+        })
     });
 
-    fit('has 2 features', async () => {
+    it('has 2 features', async () => {
         inject([ExplorerService], (service: ExplorerService) => {
             
             service.addFeature(MOCK_FEATURE_1);
@@ -63,9 +67,9 @@ describe('ExplorerComponent', () =>
 
             let element = getUIElement();
             let list = element.querySelector('li');
-            console.log(JSON.stringify(list));
+            
             expect(list.childNodes[0].textContent).toEqual(MOCK_FEATURE_1.Name);
-            expect(list.childNodes[0].textContent).toEqual(MOCK_FEATURE_2.Name);
+            expect(list.childNodes[1].textContent).toEqual(MOCK_FEATURE_2.Name);
         })
     });
 })
