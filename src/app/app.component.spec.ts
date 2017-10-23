@@ -3,6 +3,13 @@ import { AppComponent } from './app.component';
 import { ExplorerComponent } from './explorer/explorer.component';
 import { BlockTreeComponent } from './blockTree/blockTree.component';
 import { SetupComponent } from './setup/setup.component';
+import { ExplorerService } from './explorer/explorer.service';
+import { BlockTreeService } from './blockTree/blockTree.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatGridListModule, MatCardModule, MatButtonModule } from '@angular/material';
+
+import 'codemirror'
+import { CodemirrorModule } from 'ng2-codemirror';
 
 describe('AppComponent', () => {
 
@@ -14,8 +21,12 @@ describe('AppComponent', () => {
         ExplorerComponent,
         BlockTreeComponent
       ],
-      providers: [
-      ]
+      imports: [
+        BrowserModule,
+        MatGridListModule, MatCardModule, MatButtonModule,
+        CodemirrorModule
+      ],
+      providers: [ExplorerService, BlockTreeService],
     }).compileComponents();
   }));
 

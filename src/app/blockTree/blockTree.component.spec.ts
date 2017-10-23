@@ -1,18 +1,29 @@
 import { TestBed, async, inject } from "@angular/core/testing";
 import { BlockTreeComponent } from "./blockTree.component";
 import { BlockTreeService } from "./blockTree.service";
+import { BrowserModule } from "@angular/platform-browser";
+import { MatGridListModule, MatCardModule, MatButtonModule } from "@angular/material";
+import { CodemirrorModule } from "ng2-codemirror";
+import { ExplorerService } from "../explorer/explorer.service";
 
 describe('BlockTreeComponent', () =>
 {
     beforeEach(async () => {
         TestBed.configureTestingModule({
             declarations: [
-                BlockTreeComponent
+              BlockTreeComponent
+            ],
+            imports: [
+              BrowserModule,
+              MatGridListModule, MatCardModule, MatButtonModule,
+              CodemirrorModule
             ],
             providers: [
-                BlockTreeService
+              ExplorerService, 
+              BlockTreeService
             ]
-        }).compileComponents();
+        })
+        .compileComponents();
     })
 
     // data
@@ -41,4 +52,9 @@ describe('BlockTreeComponent', () =>
         let element = getDataElement();
         expect(element).toBeTruthy();
     });
+
+    it('have add button', () => {
+        let element = getUIElement();
+        expect(element.querySelector('button').textContent).toEqual('Add');
+    })
 }); 

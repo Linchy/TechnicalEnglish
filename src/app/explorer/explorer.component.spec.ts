@@ -1,6 +1,9 @@
 import { TestBed, async, inject } from "@angular/core/testing";
 import { ExplorerComponent } from "./explorer.component";
 import { ExplorerService } from "./explorer.service";
+import { IBlock, IBlockTree } from "../blockTree/blockTree.interfaces";
+import { IFeature } from "./explorer.interfaces";
+import { BlockTreeService } from "../blockTree/blockTree.service";
 
 describe('ExplorerComponent', () =>
 {
@@ -10,15 +13,19 @@ describe('ExplorerComponent', () =>
                 ExplorerComponent
             ],
             providers: [
-                ExplorerService
+                ExplorerService,
+                BlockTreeService
             ]
         }).compileComponents();
     })
 
     // data
 
-    let MOCK_FEATURE_1 = { Name: 'feature1' };
-    let MOCK_FEATURE_2 = { Name: 'feature2' };
+    let MOCK_BLOCK: IBlock = { Content: 'mock-block-code' };
+    let MOCK_BLOCK_TREE: IBlockTree = { Blocks: [ MOCK_BLOCK ] };
+    let MOCK_FEATURE_1: IFeature = { Name: 'feature1', BlockTree: MOCK_BLOCK_TREE };
+    let MOCK_FEATURE_2: IFeature = { Name: 'feature1', BlockTree: MOCK_BLOCK_TREE };
+
 
     // helpers
 

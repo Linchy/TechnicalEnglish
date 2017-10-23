@@ -1,20 +1,38 @@
 import { Injectable } from "@angular/core";
-import { IBlock } from "./blockTree.interfaces";
+import { IBlock, IBlockTree } from "./blockTree.interfaces";
+import { Subject } from "rxjs/Subject";
 
-//Injectable()
+Injectable()
 export class BlockTreeService {
 
-    private blocks: IBlock[];
+    private state: IBlockTree;
+    public stateChange: Subject<IBlockTree> = new Subject<IBlockTree>();
 
     constructor() {
-        this.blocks = [];
+        this.state = {
+            Blocks: []
+        };
     }
 
     addBlock(block: IBlock) {
-        this.blocks.push(block);
+        this.state = {
+            ...this.state,
+            Blocks: [...this.state.Blocks, block]
+        };
+        
+        this.stateChange.next(this.state);
     }
 
     getBlocks() : IBlock[] {
-        return this.blocks;
+        return this.state.Blocks;
+    }
+
+    getState() : IBlockTree {
+        return this.state;
+    }
+
+    setState(newState: IBlockTree) {
+        this.state = newState;
+        this.stateChange.next(newState);
     }
 } 

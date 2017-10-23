@@ -1,6 +1,5 @@
 import { IFeature, IExplorerState } from "./explorer.interfaces";
 import { Injectable } from "@angular/core";
-import { Map } from "immutable";
 import { Subject } from "rxjs/Subject";
 
 Injectable()

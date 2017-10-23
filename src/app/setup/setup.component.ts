@@ -1,9 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ExplorerService } from "../explorer/explorer.service";
 import { BlockTreeService } from "../blockTree/blockTree.service";
+import { IBlock, IBlockTree } from "../blockTree/blockTree.interfaces";
+import { IFeature } from "../explorer/explorer.interfaces";
 
-let MOCK_FEATURE_1 = { Name: 'feature1' };
-let MOCK_FEATURE_2 = { Name: 'feature2' };
+let MOCK_BLOCK: IBlock = { Content: 'mock-block-code' };
+
+let MOCK_FEATURE_1: IFeature = { Name: 'feature1', BlockTree: { Blocks: [ MOCK_BLOCK ] } };
+let MOCK_FEATURE_2: IFeature = { Name: 'feature2', BlockTree: { Blocks: [ MOCK_BLOCK, MOCK_BLOCK, MOCK_BLOCK, MOCK_BLOCK ] } };
 
 @Component ({
     selector: 'setup',
@@ -15,11 +19,12 @@ export class SetupComponent implements OnInit {
         public explorerService: ExplorerService,
         public blockTreeService: BlockTreeService) {
             
-        
     }
 
     ngOnInit() {
         this.explorerService.addFeature(MOCK_FEATURE_1);
         this.explorerService.addFeature(MOCK_FEATURE_2);
+
+        this.blockTreeService.setState(MOCK_FEATURE_1.BlockTree);
     }
 }

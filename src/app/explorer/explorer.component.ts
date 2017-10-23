@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { ExplorerService } from "./explorer.service";
 import { IFeature, IExplorerState } from "./explorer.interfaces";
 import { Subscription } from "rxjs/Subscription";
+import { BlockTreeService } from "../blockTree/blockTree.service";
 
 @Component ({
     selector: 'explorer',
@@ -16,7 +17,8 @@ export class ExplorerComponent {
     public explorerServiceSub: Subscription;
 
     constructor(
-        public explorerService: ExplorerService) {
+        public explorerService: ExplorerService,
+        public blockTreeService: BlockTreeService) {
         this.title = 'Features';
         this.state = explorerService.getState();
 
@@ -30,7 +32,8 @@ export class ExplorerComponent {
       this.explorerServiceSub.unsubscribe();
     }
     
-    public open(event, item) {
-      alert('Open ' + item);
+    public open(event: Event, feature: IFeature) {
+      //alert('Open ' + item);
+      this.blockTreeService.setState(feature.BlockTree);
     }
 } 

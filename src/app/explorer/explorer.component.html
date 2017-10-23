@@ -2,8 +2,8 @@
     <h3>{{title}}</h3>
 
     <ul>
-        <li  *ngFor="let item of state.Features; let i = index" (click)="open($event, item)">
-            {{item.Name}}
+        <li  *ngFor="let feature of state.Features; let i = index" (click)="open($event, feature)">
+            {{feature.Name}}
         </li>
     </ul>
 </div>

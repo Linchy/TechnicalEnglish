@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~codemirror/lib/codemirror.css";
+
+.CodeMirror {
+    height: auto;
+    border: 1px solid #eee;
+    max-height: 500px;
+  }
+
+.CodeMirror-scroll {
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
+
+.block { 
+    list-style-type: none; 
+    background-color: darkgray;
+    margin: 0px 30px 0px 0px;
+} 

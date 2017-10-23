@@ -1,0 +1,21 @@
+.left-tile {
+    align-items: left;
+}
+
+explorer {
+    background-color: grey;
+    width: 100%;
+    height: 100%;
+}
+
+blockTree {
+    background-color: grey;
+    width: 100%;
+    height: 100%;
+}
+
+layerStack {
+    background-color: grey;
+    width: 100%;
+    height: 100%;
+}

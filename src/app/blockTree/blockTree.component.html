@@ -1,9 +1,12 @@
 <div>
-        <h3>{{title}}</h3>
-    
-        <ul>
-            <li *ngFor="let item of blocks; let i = index">
-                {{item.Content}}
-            </li>
-        </ul>
-    </div>
+    <button mat-button (click)="newBlock()">Add</button>
+    <ul>
+        <li *ngFor="let item of state.Blocks; let i = index"  class="block">
+            <div>
+                <codemirror #editor [config]="config" (focus)="onFocus()" (blur)="onBlur()">
+                    {{item.Content}}
+                </codemirror>
+            </div>
+        </li>
+    </ul>
+</div>
