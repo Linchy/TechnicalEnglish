@@ -5,6 +5,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { MatGridListModule, MatCardModule, MatButtonModule } from "@angular/material";
 import { CodemirrorModule } from "ng2-codemirror";
 import { ExplorerService } from "../explorer/explorer.service";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe('BlockTreeComponent', () =>
 {
@@ -21,6 +22,9 @@ describe('BlockTreeComponent', () =>
             providers: [
               ExplorerService, 
               BlockTreeService
+            ],
+            schemas: [
+              NO_ERRORS_SCHEMA
             ]
         })
         .compileComponents();

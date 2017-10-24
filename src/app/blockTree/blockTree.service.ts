@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { IBlock, IBlockTree } from "./blockTree.interfaces";
 import { Subject } from "rxjs/Subject";
+import { ExplorerService } from "../explorer/explorer.service";
 
-Injectable()
+@Injectable()
 export class BlockTreeService {
 
     private state: IBlockTree;
@@ -15,12 +16,10 @@ export class BlockTreeService {
     }
 
     addBlock(block: IBlock) {
-        this.state = {
+        this.setState({
             ...this.state,
             Blocks: [...this.state.Blocks, block]
-        };
-        
-        this.stateChange.next(this.state);
+        });
     }
 
     getBlocks() : IBlock[] {

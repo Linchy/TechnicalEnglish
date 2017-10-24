@@ -4,6 +4,7 @@ import { ExplorerService } from "./explorer.service";
 import { IBlock, IBlockTree } from "../blockTree/blockTree.interfaces";
 import { IFeature } from "./explorer.interfaces";
 import { BlockTreeService } from "../blockTree/blockTree.service";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe('ExplorerComponent', () =>
 {
@@ -15,6 +16,9 @@ describe('ExplorerComponent', () =>
             providers: [
                 ExplorerService,
                 BlockTreeService
+            ],
+            schemas: [
+              NO_ERRORS_SCHEMA
             ]
         }).compileComponents();
     })

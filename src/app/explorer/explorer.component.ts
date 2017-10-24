@@ -32,8 +32,8 @@ export class ExplorerComponent {
       this.explorerServiceSub.unsubscribe();
     }
     
-    public open(event: Event, feature: IFeature) {
+    public open(event: Event, feature: IFeature, index: number) {
       //alert('Open ' + item);
-      this.blockTreeService.setState(feature.BlockTree);
+      this.explorerService.setActiveFeatureIndex(index);
     }
 } 
