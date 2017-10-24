@@ -20,7 +20,7 @@ describe('BlockTreeService', () =>
     let MOCK_BLOCK_TREE: IBlockTree = { Blocks: [ MOCK_BLOCK ] };
 
     it('add block', async () => {
-        inject([ExplorerService], (service: BlockTreeService) => {
+        inject([BlockTreeService], (service: BlockTreeService) => {
             service.addBlock(MOCK_BLOCK);
             let blocks = service.getBlocks();
             expect(blocks.length).toBe(1);
@@ -29,8 +29,25 @@ describe('BlockTreeService', () =>
     })
 
     it('set state', async () => {
-        inject([ExplorerService], (service: BlockTreeService) => {
+        inject([BlockTreeService], (service: BlockTreeService) => {
             service.setState(MOCK_BLOCK_TREE);
+            var state = service.getState();
+            expect(state).toEqual(MOCK_BLOCK_TREE);
+        });
+    })
+
+    it('set active', () => {
+        inject([BlockTreeService], (service: BlockTreeService) => {
+            service.setState(MOCK_BLOCK_TREE);
+            service.setActiveBlockIndex(0);
+            var state = service.getActiveBlock();
+            expect(state).toEqual(MOCK_BLOCK_TREE.Blocks[0]);
+        });
+    })
+
+    it('update content', () => {
+        inject([BlockTreeService], (service: BlockTreeService) => {
+            service.updateActiveBlockContent("newContent");
             var state = service.getState();
             expect(state).toEqual(MOCK_BLOCK_TREE);
         });

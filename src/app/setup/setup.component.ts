@@ -7,7 +7,7 @@ import { IFeature } from "../explorer/explorer.interfaces";
 let MOCK_BLOCK: IBlock = { Content: 'mock-block-code' };
 
 let MOCK_FEATURE_1: IFeature = { Name: 'feature1', BlockTree: { Blocks: [ MOCK_BLOCK ] } };
-let MOCK_FEATURE_2: IFeature = { Name: 'feature2', BlockTree: { Blocks: [ MOCK_BLOCK, MOCK_BLOCK, MOCK_BLOCK, MOCK_BLOCK ] } };
+let MOCK_FEATURE_2: IFeature = { Name: 'feature2', BlockTree: { Blocks: [ MOCK_BLOCK, { ...MOCK_BLOCK }, { ...MOCK_BLOCK }, { ...MOCK_BLOCK } ] } };
 
 @Component ({
     selector: 'setup',
@@ -25,6 +25,6 @@ export class SetupComponent implements OnInit {
         this.explorerService.addFeature(MOCK_FEATURE_1);
         this.explorerService.addFeature(MOCK_FEATURE_2);
 
-        this.blockTreeService.setState(MOCK_FEATURE_1.BlockTree);
+        this.explorerService.setActiveFeatureIndex(0);
     }
 }

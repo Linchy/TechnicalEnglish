@@ -24,7 +24,6 @@ export class ExplorerService {
 
     addFeature(feature: IFeature) {
         this.setState({
-            ...this.state,
             Features: [...this.state.Features, feature]
         });
     }
@@ -54,14 +53,17 @@ export class ExplorerService {
     // update feature
 
     updateActiveFeature(feature: IFeature) {
-        let newState = { ...this.state };
+        let newState = {
+            Features: [...this.state.Features]
+        };
         newState.Features[this.activeFeatureIndex] = feature;
         this.setState(newState);
     }
 
     updateActiveFeatureBlockTree(blockTree: IBlockTree) {
+        let active = this.getActiveFeature();
         this.updateActiveFeature({
-            ...this.getActiveFeature(),
+            Name: active.Name,
             BlockTree: blockTree
         });
     }

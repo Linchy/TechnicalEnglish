@@ -34,8 +34,8 @@ describe('ExplorerService', () =>
 
     it('activate feature', async () => {
         inject([ExplorerService], (service: ExplorerService) => {
-            service.setActiveFeature(0);
-            expect(service.activeFeature).toEqual(MOCK_FEATURE_1);
+            service.setActiveFeatureIndex(0);
+            expect(service.getActiveFeature()).toEqual(MOCK_FEATURE_1);
         });
     })
 }); 

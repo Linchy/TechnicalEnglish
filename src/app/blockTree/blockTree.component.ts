@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { BlockTreeService } from "./blockTree.service";
 import { ExplorerService } from "../explorer/explorer.service";
 import { Subscription } from "rxjs/Subscription";
-import { IBlockTree } from "./blockTree.interfaces";
+import { IBlockTree, IBlock } from "./blockTree.interfaces";
 
 let MOCK_FEATURE_1 = { Name: 'feature1' };
 let MOCK_FEATURE_2 = { Name: 'feature2' };
@@ -19,6 +19,7 @@ export class BlockTreeComponent {
     public blockTreeSub: Subscription;
     
     public config: any;
+    public activeCodeMirrorContent: string;
 
     constructor(
         public explorerService: ExplorerService,
@@ -27,18 +28,22 @@ export class BlockTreeComponent {
         this.state = blockTreeService.getState();
         this.blockTreeSub = blockTreeService.stateChange.subscribe((value) => { 
             this.state = value;
-            console.log(JSON.stringify(value));
         });
 
-        this.config = { lineNumbers: true, mode: 'text/x-go', viewportMargin: Infinity };
+        this.config = { lineNumbers: true, mode: 'text/x-clojure', viewportMargin: Infinity };
     }
 
-    onBlur() {
-
+    onFocus(block: IBlock, index: number) {
+        this.blockTreeService.setActiveBlockIndex(index);
+        this.activeCodeMirrorContent = block.Content;
     }
 
-    onFocus() {
+    onChange(item, editorValue) {
+        this.activeCodeMirrorContent = editorValue;
+    }
 
+    onBlur(block: IBlock) {
+        this.blockTreeService.updateActiveBlockContent(this.activeCodeMirrorContent);
     }
 
     newBlock() {

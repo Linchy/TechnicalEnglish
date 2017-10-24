@@ -3,8 +3,8 @@
     <ul>
         <li *ngFor="let item of state.Blocks; let i = index"  class="block">
             <div>
-                <codemirror #editor [config]="config" (focus)="onFocus()" (blur)="onBlur()">
-                    {{item.Content}}
+                <codemirror #editor [value]="item.Content" [config]="config" 
+                    (focus)="onFocus(item, i)" (blur)="onBlur(item)" (change)="onChange(item, editor.value)">
                 </codemirror>
             </div>
         </li>
