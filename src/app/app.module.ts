@@ -12,6 +12,7 @@ import { ExplorerService } from './explorer/explorer.service';
 import { BlockTreeService } from './blockTree/blockTree.service';
 
 import { CodemirrorModule } from 'ng2-codemirror';
+import "codemirror/mode/clojure/clojure"
 
 @NgModule({
   declarations: [
